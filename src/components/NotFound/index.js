@@ -1,3 +1,5 @@
+import NotFound from './components/NotFound'
+
 import './index.css'
 
 const NotFound = () => (
