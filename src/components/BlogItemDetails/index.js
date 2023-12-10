@@ -7,13 +7,13 @@ import './index.css'
 class BlogItemDetails extends Component {
   state = {blogDate: {}, isLoading: true}
 
-  componentDidCatch() {
-    this.getBlogItemDate()
+  componentDidMount() {
+    this.getBlogItemData()
   }
 
-  getBlogItemDate = async () => {
+  getBlogItemData = async () => {
     const {match} = this.props
-    const {params} = this.match
+    const {params} = match
     const {id} = params
     const response = await fetch(`https://apis.ccbp.in/blogs/${id}`)
     const date = await response.json()
@@ -24,11 +24,11 @@ class BlogItemDetails extends Component {
       avatarUrl: data.avatar_url,
       author: data.author,
     }
-    this.setState({blogDate: updatedData, isLoading: false})
+    this.setState({blogData: updatedData, isLoading: false})
   }
 
   renderBlogItemDetails = () => {
-    const {blogDate} = this.state
+    const {blogData} = this.state
     const {title, imageUrl, content, avatarUrl, author} = blogData
 
     return (
@@ -51,7 +51,7 @@ class BlogItemDetails extends Component {
       <div className="blog-container">
         {isLoading ? (
           <div data-testid="loader">
-            <Loader type="TailsSpin" color="#00bff" height={50} width={50} />
+            <Loader type="TailsSpin" color="#00bfff" height={50} width={50} />
           </div>
         ) : (
           this.renderBlogItemDetails()
